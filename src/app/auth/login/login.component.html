@@ -1,0 +1,34 @@
+<div class="container-login">
+  <div class="wrap-login p-5">
+    <form class="login-form validate-form" [formGroup]="validateForm">
+      <span class="login-form-title pb-4">
+        Account Login
+      </span>
+      <div class="wrap-input validate-input">
+        <input class="input" type="text" formControlName="username" placeholder="username">
+        <span class="focus-input-1"></span>
+        <span class="focus-input-2"></span>
+      </div>
+      <div class="wrap-input rs1 validate-input ">
+        <input class="input" type="password" name="pass" formControlName="password" placeholder="Password">
+        <span class="focus-input-1"></span>
+        <span class="focus-input-2"></span>
+      </div>
+      <div class="container-login-form-btn mt-4 mb-5">
+        <button class="login-form-btn" (click)="login()">Sign in</button>
+      </div>
+      <div class="text-center">
+        <span class="txt1">Forgot</span>
+        <a href="#" class="txt2 hov1">Username / Password?</a>
+      </div>
+      <div class="text-center">
+        <span class="txt1">
+          Create an account?
+        </span>
+        <a href="#" class="txt2 hov1" >
+          Sign up
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
