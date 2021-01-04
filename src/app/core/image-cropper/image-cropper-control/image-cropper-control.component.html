@@ -1,0 +1,23 @@
+<div class="cropper-container">
+  <div class="image-cropper" [class.fullwidth]="fullWidth">
+    <div class="d-flex">
+      <div class="mb-2">
+        <!-- <label *ngIf="isEmpty" [htmlFor]="controlId" class="px-3 btn btn-upload">{{ btnUploadText }}</label> -->
+        <!-- <button *ngIf="!isEmpty" [disabled]="disabled" (click)="remove($event)" class="px-3 btn btn-remove btn-secondary">{{ btnRemoveText }}</button> -->
+        <i *ngIf="!isEmpty" (click)="remove($event)"  class="fa fa-trash ml-2"></i>
+        <span class="ml-2 text-muted" *ngIf="hidePlaceholder && isEmpty">{{ textNoImage }}</span>
+        <i *ngIf="!allowCrop && isUploading" class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div class="image">
+        <ng-container *ngIf="!isEmpty; else placeholder">
+          <img [src]="displayedUrl || imageUrl" class="preview" #preview/>
+        </ng-container>
+        <ng-template #placeholder>
+          <label *ngIf="!hidePlaceholder" [htmlFor]="controlId" class="image-placeholder"></label>
+        </ng-template>
+      </div>
+    </div>
+    <input [id]="controlId"  [disabled]="disabled" type="file" (change)="open($event.target)" [accept]="accept" class="ghost" />
+  </div>
+</div>
+<image-cropper-modal [class.d-none]="!allowCrop" [allowCrop]="allowCrop" class="d-none" #cropperModal (ready)="ready.emit()" (saved)="saveData($event)" [settings]="settings"></image-cropper-modal>

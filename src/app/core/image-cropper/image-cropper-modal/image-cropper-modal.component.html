@@ -1,0 +1,27 @@
+<div>
+  <div bsModal="bsModal" #modal="bs-modal"  class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-fake-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ modalTitle }}</h4>
+          <button type="button" (click)="modal.hide()" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div #modalBody class="modal-body cropper-container">
+          <div class="wrapper">
+            <div *ngIf="loadError" class="alert alert-warning">{{ loadImageErrorText }}</div>
+            <div class="cropper">
+              <img #image *ngIf="imageUrl" class="img-rounded" alt="image" [src]="imageUrl" (load)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="hide()" type="button" class="btn btn-secondary btn-uppercase" >{{ btnCancel }}</button>
+          <button (click)="exportCanvas()" type="button" class="btn btn-primary btn-uppercase">{{ btnOK }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

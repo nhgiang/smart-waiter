@@ -1,0 +1,47 @@
+<div class="header">
+  <h5 class="mb-0">Quản lý bàn</h5>
+</div>
+<div class="body" simplebar>
+  <div class="action d-flex">
+    <div class="search d-flex">
+      <input type="text" class="mr-3 form-control" [(ngModel)]="keyword">
+      <button class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+    </div>
+    <div class="add">
+      <button class="btn btn-primary" (click)="addItem()">Thêm mới</button>
+    </div>
+  </div>
+  <div class="list-item mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên bàn</th>
+          <th>Số chỗ ngồi</th>
+          <th>Trạng thái</th>
+          <th class="text-center" style="width: 130px;">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of items; let index = index">
+          <tr>
+            <td>{{index + 1}}</td>
+            <td>{{item?.name}}</td>
+            <td>{{item?.totalSeats}}</td>
+            <td>{{item?.status}}</td>
+            <td class="text-center" style="width: 130px;">
+              <div>
+                <span class="common-action mr-3 text-primary" (click)="editItem(item?.id)">
+                  <i class="fa fa-cog"></i>
+                </span>
+                <span class="common-action text-danger" [confirmation]="'Bạn có chắc muốn xóa thông tin bàn này?'" (confirmed)="deleteItem(item?.id)">
+                  <i class="fa fa-trash"></i> 
+                </span>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

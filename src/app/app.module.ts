@@ -3,18 +3,38 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomHttpInterceptorService } from './services/custom-http-interceptor.service';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Ng2IziToastModule } from 'ng2-izitoast';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
 
+const config =  {
+  cloud_name: 'giang2000',
+  upload_preset: 'sem4_cloundinary'
+};
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    Ng2IziToastModule,
+    CloudinaryModule.forRoot(cloudinary, config),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

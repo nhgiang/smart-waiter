@@ -1,0 +1,29 @@
+.temp-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+  opacity: 0.5;
+  background-color: #000;
+  transition: opacity 0.15s linear;
+}
+
+.icon {
+  padding: 0 30px;
+  margin-bottom: 24px;
+}
+.modal-body {
+  padding: 30px 20px;
+  color: #666;
+}
+
+.modal-title {
+  color: #1d1d1d;
+  font-weight: bold;
+  font-size: 20px;
+}
+img {
+  width: 50px;
+}

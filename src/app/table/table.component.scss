@@ -1,0 +1,20 @@
+.header {
+  padding: 1.25rem;
+  border-bottom: 1px solid #e2e5e8;
+}
+.body {
+  overflow: auto;
+  padding: 20px;
+  height: calc(100% - 65px);
+  .action {
+    justify-content: space-between;
+    button {
+      white-space: nowrap;
+    }  
+  }
+  .list-item {
+    .common-action {
+        cursor: pointer;
+    }
+  }
+}

@@ -20,6 +20,7 @@ export class CustomHttpInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = storageUtils.get('token');
+    console.log(accessToken)
     return next.handle(this.addAuthorizationHeader(req, accessToken)).pipe(
       catchError(err => {
         // in case of 401 http error
@@ -46,7 +47,7 @@ export class CustomHttpInterceptorService implements HttpInterceptor {
 
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     if (token) {
-      return request.clone({setHeaders: {Authorization: `Bearer ${token}`}});
+      return request.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
     }
     return request;
   }

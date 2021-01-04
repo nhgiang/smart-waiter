@@ -6,16 +6,17 @@ import { baseUrl } from './base-url';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthApiService extends BaseApi {
+export class CustomService extends BaseApi {
+
   constructor(
     httpClient: HttpClient,
     @Inject(baseUrl) protected hostUrl: string,
   ) {
     super(httpClient);
-    this.setEndpoint(hostUrl, 'auth');
+    this.setEndpoint(hostUrl, 'custom');
   }
 
-  login(body) {
-    return this.httpClient.post<any>(this.createUrl('token'), body);
+  uploadFile(formData) {
+    return this.httpClient.post(this.createUrl('upload-file'), formData, { responseType: 'text' })
   }
 }
