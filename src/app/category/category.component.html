@@ -31,7 +31,9 @@
             <td>{{item?.name}}</td>
             <!-- <td>Xem hình ảnh</td> -->
             <td>
-              <img style="width: 100px;" [src]="item?.imageUrl" alt="">
+              <img style="width: 100px;
+              height: 100px;
+              object-fit: cover;" [src]="item?.imageUrl" alt="">
             </td>
             <td>{{item?.price}}</td>
             <td>{{item?.type}}</td>

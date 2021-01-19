@@ -1,0 +1,22 @@
+<div class="bottom-sheet">
+  <div class="list-item">
+
+    <div class="item" *ngFor="let item of data?.orderItemList">
+      <div class="">
+        <div>Tên món</div>
+        <div>{{item?.name}}</div>
+      </div>
+      <div class="">
+        <div>Số lượng</div>
+        <div>{{item?.quantity}}</div>
+      </div>
+      <div class="note">
+        <div>Note</div>
+        <div style="font-weight: 400">{{item?.note}}</div>
+      </div>
+      <div class="action">
+        <button class="btn btn-sm btn-success" (click)="done(item?.id)">Xong</button>
+      </div>
+    </div>
+  </div>
+</div>

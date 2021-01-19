@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="mb-0">Chi tiết hóa đơn</h5>
+  <a (click)="closeModal()">&times;</a>
+</div>
+<div class="modal-body">
+  <div class="customer-name d-flex">
+    Tên khách hàng: Nguyễn văn A(phần hóa đơn chưa có data khách hàng)
+  </div>
+  <div class="date">
+    Ngày tạo hóa đơn: {{createdDate | date: 'dd/MM/yyyy HH:MM:SS'}}
+  </div>
+  <div class="list-item">
+    <div class="item item-head">
+      <h6>Tên món</h6>
+      <h6>Số lượng</h6>
+      <h6>Giảm giá</h6>
+      <h6>Giá tiền</h6>
+    </div>
+    <div class="item" *ngFor="let item of item?.items">
+      <div class="item-name">{{item?.name}}</div>
+      <div class="item-type">{{item?.quantity}}</div>
+      <div class="">{{item?.discount}} %</div>
+      <div class="item-price">{{item?.price}}</div>
+    </div>
+    <div class="item item-foot">
+      <h6>Tổng cộng</h6>
+      <div class="price">{{item?.totalPrice}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.list-item {
+  padding: 12px 0;
+  border-top: dotted 2px #cccccc;
+  margin-top: 20px;
+  .item {
+    display: flex;
+    justify-content: space-between;
+  }
+}

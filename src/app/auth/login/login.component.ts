@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import jwtDecode from 'jwt-decode';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
-
+  helper = new JwtHelperService();
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -33,6 +34,11 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.invalid) {
       return;
     }
-    this.authService.login(this.validateForm.value).subscribe(() => { this.router.navigate(['']); });
+    this.authService.login(this.validateForm.value).subscribe(res => {
+      const decoded = this.helper.decodeToken(res.token);
+      if (decoded.sub === 'admin') {
+        this.router.navigate(['']);
+      }
+    });
   }
 }

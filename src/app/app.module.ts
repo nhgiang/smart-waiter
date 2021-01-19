@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Ng2IziToastModule } from 'ng2-izitoast';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as cloudinary from 'cloudinary-core';
+import { OrderComponent } from './order/order.component';
+import { OrderFormComponent } from './order/order-form/order-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const config =  {
   cloud_name: 'giang2000',
@@ -17,7 +20,7 @@ const config =  {
 };
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ const config =  {
     ReactiveFormsModule,
     Ng2IziToastModule,
     CloudinaryModule.forRoot(cloudinary, config),
+    BrowserAnimationsModule
   ],
   providers: [
     {

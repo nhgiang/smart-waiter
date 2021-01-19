@@ -27,5 +27,9 @@ export class AdminService extends BaseApi{
     create: (command) => this.httpClient.post(this.createUrl('table/save'), command),
     delete: (id) => this.httpClient.delete(this.createUrl(`table/delete?id=${id}`),{responseType: 'text'}),
     getById: (id) => this.httpClient.get<any>(this.createUrl(`table/getTable?id=${id}`))
-  }
+  };
+  order = {
+    getOrders: (keyword) => this.httpClient.get<any>(`${this.hostUrl}/order/getOrders`),
+    getOrder: (id) => this.httpClient.get<any>(`${this.hostUrl}/order/getOrder?id=${id}`)
+  };
 }

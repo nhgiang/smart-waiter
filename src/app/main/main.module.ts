@@ -12,6 +12,8 @@ import { FormCategoryComponent } from '../category/form-category/form-category.c
 import { TableComponent } from '../table/table.component';
 import { TableFormComponent } from '../table/table-form/table-form.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { OrderComponent } from '../order/order.component';
+import { OrderFormComponent } from '../order/order-form/order-form.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { FileUploadModule } from 'ng2-file-upload';
     CategoryComponent,
     FormCategoryComponent,
     TableComponent,
-    TableFormComponent
+    TableFormComponent,
+    OrderComponent,
+    OrderFormComponent
   ],
   imports: [
     CommonModule,

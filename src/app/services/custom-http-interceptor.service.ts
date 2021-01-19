@@ -20,7 +20,6 @@ export class CustomHttpInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = storageUtils.get('token');
-    console.log(accessToken)
     return next.handle(this.addAuthorizationHeader(req, accessToken)).pipe(
       catchError(err => {
         // in case of 401 http error

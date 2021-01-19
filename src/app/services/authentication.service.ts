@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'types/model';
 import { storageUtils } from 'utils/storage';
 import { AuthApiService } from '../api/auth.api.service';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'

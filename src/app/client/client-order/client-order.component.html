@@ -1,0 +1,70 @@
+<div class="list-order-container">
+  <div class="header">
+    <h5>Bàn số 1</h5>
+  </div>
+  <div class="row screen">
+    <div class="col-8">
+      <h5 class="text-center mb-2">Menu</h5>
+      <div class="menu">
+        <div class="menu-item" (click)="itemActive = 1" [class.active]="itemActive === 1">Đồ ăn</div>
+        <div class="menu-item" (click)="itemActive = 2" [class.active]="itemActive === 2">Đồ uống</div>
+      </div>
+      <div class="list-item" *ngIf="itemActive === 1">
+        <div class="item" *ngFor="let item of foods">
+          <div class="card-image">
+            <img [src]="item?.imageUrl" alt="">
+          </div>
+          <div class="item-detail">
+            <h5>{{item?.name}}</h5>
+            <div>Giá: {{item?.price | number}} VNĐ</div>
+            <button class="btn btn-sm btn-primary" (click)="addItem(item)">Thêm</button>
+          </div>
+        </div>
+      </div>
+      <div class="list-item" *ngIf="itemActive === 2">
+        <div class="item" *ngFor="let item of drinks">
+          <div class="card-image">
+            <img [src]="item?.imageUrl" alt="">
+          </div>
+          <div class="item-detail">
+            <h5>{{item?.name}}</h5>
+            <div>Giá: {{item?.price | number}} VNĐ</div>
+            <button class="btn btn-sm btn-primary" (click)="addItem(item)">Thêm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 right">
+      <h5>Order</h5>
+      <div class="menu-right">
+        <div class="menu-head">
+          <div>Tên món</div>
+          <div>Số lượng món</div>
+        </div>
+        <div class="list-item-order">
+          <div class="item-order" *ngFor="let item of itemOrders">
+            <p>{{item.name}}</p>
+            <div class="order-number">
+              <i class="fa fa-minus" (click)="minus(item?.id)"></i>
+              <span>{{item?.number}}</span>
+              <i class="fa fa-plus" (click)="plus(item?.id)"></i>
+            </div>
+            <div class="delete-icon">
+              <i class="fa fa-plus" (click)="remove(item?.id)"></i>
+            </div>
+          </div>
+        </div>
+        <div class="right-bottom">
+          <div class="total-price">
+            <div>Total price</div>
+            <div>{{totalPrice | number}} VNĐ</div>
+          </div>
+          <div class="actions">
+            <button class="btn-sm btn btn-danger mr-3" (click)="order()">Gọi món</button>
+            <button class="btn btn-sm btn-warning">Thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

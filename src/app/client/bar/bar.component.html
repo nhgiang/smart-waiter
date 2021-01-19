@@ -1,0 +1,12 @@
+<div class="list-order-container">
+  <div class="header">
+    <h5>Bếp</h5>
+  </div>
+  <div class="row list-table">
+    <div class="col-4" *ngFor="let item of tables;let index = index">
+      <div class="table" (click)="showOrder(item.tableId)" [class.done]="item?.statusTable === 2" [class.inProgress]="item?.statusTable === 1">
+        {{index + 1}}
+      </div>
+    </div>
+  </div>
+</div>

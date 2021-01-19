@@ -78,11 +78,18 @@
             <span>Quản lý bàn</span>
           </a>
         </li>
+        <li class="d-flex align-items-center" [class.active]="menuActive === 3" (click)="menuActive = 3">
+          <a [routerLink]="['/order']">
+            <i class="fa fa-table"></i> 
+            <span>Quản lý order</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
   <div class="rigth-side">
     <div class="content-section">
+      <button (click)="post()">click me</button>
       <router-outlet></router-outlet>
     </div>
   </div>

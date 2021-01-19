@@ -1,0 +1,42 @@
+<div class="header">
+  <h5 class="mb-0">Quản lý sản phẩm</h5>
+</div>
+<div class="body" simplebar>
+  <div class="action d-flex">
+    <div class="search d-flex">
+      <input type="text" class="mr-3 form-control" [(ngModel)]="keyword">
+      <button class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+    </div>
+    <!-- <div class="add">
+      <button class="btn btn-primary" (click)="addItem()">Thêm mới</button>
+    </div> -->
+  </div>
+  <div class="list-item mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Ngày tạo</th>
+          <th>Tổng tiền</th>
+          <th>Tổng số món</th>
+          <th class="text-center" style="width: 130px;">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of items; let index = index">
+          <tr>
+            <td>{{index + 1}}</td>
+            <td>{{item?.createdDate | date: 'dd/MM/yyyy HH:MM:SS'}}</td>
+            <td>{{item?.totalPrice}}</td>
+            <td>{{item?.totalItems}}</td>
+            <td class="text-center" style="width: 130px;">
+              <div class="cursor-pointer" (click)="viewDetail(item?.id,item?.createdDate)">
+               Xem chi tiết
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
