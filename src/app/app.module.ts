@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -10,9 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Ng2IziToastModule } from 'ng2-izitoast';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as cloudinary from 'cloudinary-core';
-import { OrderComponent } from './order/order.component';
-import { OrderFormComponent } from './order/order-form/order-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const config =  {
   cloud_name: 'giang2000',
@@ -27,6 +25,7 @@ const config =  {
     AppRoutingModule,
     HttpClientModule,
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     ReactiveFormsModule,
     Ng2IziToastModule,
     CloudinaryModule.forRoot(cloudinary, config),

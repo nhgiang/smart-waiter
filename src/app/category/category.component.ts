@@ -11,7 +11,10 @@ import { FormCategoryComponent } from './form-category/form-category.component';
 })
 export class CategoryComponent implements OnInit {
   keyword: string;
-  items: any[]
+  items: any[];
+  type = null;
+  page = 1;
+  perPage = 10;
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,
@@ -64,5 +67,9 @@ export class CategoryComponent implements OnInit {
         this.items = res;
       });
     });
+  }
+
+  searchByType(e) {
+    this.type = e.target.value;
   }
 }

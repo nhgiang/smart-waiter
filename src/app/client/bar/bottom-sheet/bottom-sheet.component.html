@@ -1,7 +1,7 @@
 <div class="bottom-sheet">
   <div class="list-item">
 
-    <div class="item" *ngFor="let item of data?.orderItemList">
+    <div class="item" *ngFor="let item of data?.items">
       <div class="">
         <div>Tên món</div>
         <div>{{item?.name}}</div>
@@ -14,8 +14,15 @@
         <div>Note</div>
         <div style="font-weight: 400">{{item?.note}}</div>
       </div>
-      <div class="action">
+      <div class="note">
+        <div>Trạng thái</div>
+        <div style="font-weight: 400">{{getStatus(item?.status) }}</div>
+      </div>
+      <div class="action"  *ngIf="item.status === 'IN_PROGRESS'">
         <button class="btn btn-sm btn-success" (click)="done(item?.id)">Xong</button>
+      </div>
+      <div class="action" *ngIf="item.status === 'NEW'" >
+        <button class="btn btn-sm btn-success" (click)="inprogress(item?.id)">Đang làm</button>
       </div>
     </div>
   </div>

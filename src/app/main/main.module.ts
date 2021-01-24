@@ -8,12 +8,14 @@ import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormCategoryComponent } from '../category/form-category/form-category.component';
 import { TableComponent } from '../table/table.component';
 import { TableFormComponent } from '../table/table-form/table-form.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { OrderComponent } from '../order/order.component';
 import { OrderFormComponent } from '../order/order-form/order-form.component';
+import { BillComponent } from '../bill/bill.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { OrderFormComponent } from '../order/order-form/order-form.component';
     TableComponent,
     TableFormComponent,
     OrderComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    BillComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { OrderFormComponent } from '../order/order-form/order-form.component';
     FormsModule,
     ModalModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule
   ]
 })
 export class MainModule { }

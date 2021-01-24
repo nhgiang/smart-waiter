@@ -1,0 +1,27 @@
+.order-detail-container {
+  border: 1px solid #cccccc;
+  height: 655px;
+  overflow: hidden;
+  .header {
+    padding: 10px;
+    background-color: #009aff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+    a {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      left: 10px;
+      color: #ffffff;
+    }
+  }
+  .detail {
+    margin-left: 12px;
+  }
+}
+.body {
+  padding: 16px;
+}

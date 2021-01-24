@@ -11,7 +11,9 @@ import { TableFormComponent } from './table-form/table-form.component';
 })
 export class TableComponent implements OnInit {
   keyword: string;
-  items: any[]
+  items: any[];
+  page = 1;
+  perPage = 10;
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,

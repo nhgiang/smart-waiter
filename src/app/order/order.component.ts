@@ -13,6 +13,9 @@ import { SocketioService } from '../services/socketio.service';
 export class OrderComponent implements OnInit {
   keyword: string;
   items = [];
+  page = 1;
+  perPage = 10;
+  status = '';
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,
@@ -25,8 +28,15 @@ export class OrderComponent implements OnInit {
       this.items = res;
     });
     this.socketService.msg.subscribe(items => {
-      console.log(items)
-      this.items.push(items);
+      if (items.type === 'create') {
+        this.items.push(items);
+      } else {
+        this.items.map((item, i) => {
+          if (item.id === items.id) {
+            this.items[i] = items
+          }
+        })
+      }
     });
   }
 
@@ -75,7 +85,12 @@ export class OrderComponent implements OnInit {
     const initialState = { id, createdDate };
     const ref = this.modalService.show(OrderFormComponent, {
       initialState,
-      backdrop: 'static'
+      backdrop: 'static',
+      class: 'modal-lg'
     })
+  }
+
+  pay() {
+    this.socketService.createBill({});
   }
 }

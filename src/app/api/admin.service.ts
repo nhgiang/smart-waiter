@@ -32,4 +32,7 @@ export class AdminService extends BaseApi{
     getOrders: (keyword) => this.httpClient.get<any>(`${this.hostUrl}/order/getOrders`),
     getOrder: (id) => this.httpClient.get<any>(`${this.hostUrl}/order/getOrder?id=${id}`)
   };
+  bill = {
+    getBills: (endDate,startDate) => this.httpClient.get<any>(`${this.hostUrl}/bill/getBills?startDate=${endDate}&endDate=${startDate}`)
+  }
 }

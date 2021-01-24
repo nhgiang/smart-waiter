@@ -20,9 +20,11 @@ export class SocketioService {
     const that = this;
     // tslint:disable-next-line:only-arrow-functions
     this.stompClient.connect({}, (frame) => {
-
       that.stompClient.subscribe('/topic/response', (message) => {
         console.log(message)
+        if (message.body.type === 'createBill') {
+          console.log(JSON.parse(message.body))
+        }
         if (message.body) {
           that.msg.next(JSON.parse(message.body));
         }
@@ -44,6 +46,9 @@ export class SocketioService {
 
   updateStatusOrder(message) {
     this.stompClient.send('/app/order.updateStatus', {}, JSON.stringify(message));
+  }
 
+  createBill(message) {
+    this.stompClient.send('/app/bill.create',{}, JSON.stringify(message));
   }
 }

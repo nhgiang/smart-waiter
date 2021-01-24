@@ -535,3 +535,10 @@
 html, body {
   height: 100%
 }
+.table th, table td{
+  vertical-align: middle !important;
+}
+.table thead th {
+  font-weight: 500;
+  color: rgb(0 0 0 / 70%);
+}

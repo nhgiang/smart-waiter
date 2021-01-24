@@ -1,1 +1,30 @@
-<p>client-order-detail works!</p>
+<div class="order-detail-container">
+  <div class="header">
+    <h5 class="mb-0">Bàn số 1</h5>
+    <a [routerLink]="['..','order']"><i class="fa fa-list-ul"></i></a>
+  </div>
+  <div class="body ">
+    <h6 class="mb-2">Tổng số món: {{order?.items?.length}}</h6>
+    <div class="items pr-3 pl-3 row" >
+      <div class="item mb-3 d-flex col-6" *ngFor="let item of order?.items">
+        <div class="card-image">
+          <img [src]="item?.imageUrl" style="width: 100px;height: 100px">
+        </div>
+        <div class="detail">
+          <div class="name">
+            Tên món: {{item?.name}}
+          </div>
+          <div>
+            Giá tiền: {{item?.price}}
+          </div>
+          <div class="number">
+            Số lượng: {{item?.quantity}}
+          </div>
+          <div class="status">
+            Trạng thái: {{getStatus(item?.status)}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

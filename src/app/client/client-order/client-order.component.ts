@@ -19,6 +19,7 @@ export class ClientOrderComponent implements OnInit {
   drinks: any[];
   token: any;
   orderId: string;
+  tableId;
   constructor(
     private admin: AdminService,
     private socketService: SocketioService
@@ -27,7 +28,6 @@ export class ClientOrderComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.helper.decodeToken(storageUtils.get('token'));
     this.fetch();
-    this.fecthOrder();
     this.socketService.msg.subscribe(data => {
       this.orderId = data;
     });
@@ -38,12 +38,16 @@ export class ClientOrderComponent implements OnInit {
       this.foods = item.filter(t => t.type === 'FOOD');
       this.drinks = item.filter(t => t.type === 'DRINK');
     });
+    this.admin.table.getTables('').subscribe(tables => {
+      this.tableId = tables.find(t => this.token.jti === t.loginTableId).id;
+      this.fecthOrder();
+    })
   }
 
   fecthOrder() {
     this.admin.order.getOrders('').subscribe(orders => {
-      if (orders.filter(o => o.tableId === this.token.jti).length > 0) {
-        this.orderId = orders.filter(o => o.tableId === this.token.jti)[0].id;
+      if (orders.filter(o => o.tableId === this.tableId).length > 0) {
+        this.orderId = orders.filter(o => o.tableId === this.tableId)[0].id;
       }
     });
   }
@@ -107,10 +111,33 @@ export class ClientOrderComponent implements OnInit {
     } else {
       const data = {
         orderItemList,
-        tableId: this.token.jti
+        tableId: this.tableId
       };
       this.socketService.sendMessage(data);
     }
     this.itemOrders = [];
+  }
+
+  payment() {
+    // const data = {
+    //   orderId: this.orderId,
+    //   orderStatus: 'PAYMENT'
+    // };
+    // this.socketService.updateStatusOrder(data);
+    const billData = {
+      tableId: this.token.jti,
+      orderIds: [
+        this.orderId
+      ]
+    }
+    this.socketService.createBill(billData)
+  }
+
+  note(id, e) {
+    this.itemOrders.map((item, i) => {
+      if (item.id === id) {
+        item.note = e.target.value;
+      }
+    });
   }
 }

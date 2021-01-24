@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketioService } from '../services/socketio.service';
 import * as io from 'socket.io-client';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,29 +12,13 @@ import * as io from 'socket.io-client';
 export class MainComponent implements OnInit {
   menuActive = 1;
   socket: any;
-  constructor(private socketService: SocketioService) {
-  }
+  constructor(
+    private socketService: SocketioService,
+    private authService: AuthenticationService,
+    private router: Router 
+  ) {}
 
   ngOnInit(): void {
-
-    // this.socketService.listen('order').subscribe((data) => {
-    //   console.log('messaged', data)
-    // })
-    // this.socketService.listen('connect').subscribe((data) => {
-    //   console.log('messaged', data)
-    // })
-    // this.socketService.listen('connecting').subscribe((data) => {
-    //   console.log('messaged', data)
-    // })
-    // this.socketService.connection()
-    // this.socket = io(`http://104.131.36.144:9000/order`);
-    //   this.socket.on('order', (data) => {
-    //     console.log(data);
-    //   });
-    // console.log(this.socket)
-    //   this.socket.on('connect', () => {
-    //     console.log('connect')
-    // });
   }
 
   post() {
@@ -42,5 +28,10 @@ export class MainComponent implements OnInit {
       status: 'PAID'
     };
     this.socketService.sendMessage(data);
+  }
+
+  logout() {
+    this.authService.logout()
+    this.router.navigate(['auth'])
   }
 }

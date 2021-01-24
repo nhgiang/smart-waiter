@@ -12,49 +12,22 @@
                 <span>···</span><i class="ant-menu-submenu-arrow"></i>
               </div>
             </li>
-            <li class="ant-menu-item ant-menu-item-only-child" role="menuitem"><span role="img" aria-label="menu-fold"
-                class="anticon anticon-menu-fold nav-icon"><svg viewBox="64 64 896 896" focusable="false" class=""
-                  data-icon="menu-fold" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+            <li class="ant-menu-item ant-menu-item-only-child" role="menuitem">
+              <span role="img" aria-label="menu-fold" class="anticon anticon-menu-fold nav-icon">
+                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="menu-fold" width="1em" height="1em"
+                  fill="currentColor" aria-hidden="true">
                   <path
                     d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z">
                   </path>
-                </svg></span></li>
-            <!-- <li class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" role="menuitem"
-              style="display: none;">
-              <div class="ant-menu-submenu-title" role="button" aria-expanded="false" aria-haspopup="true">
-                <span>···</span><i class="ant-menu-submenu-arrow"></i>
-              </div>
-            </li> -->
-            <!-- <li class="ant-menu-item ant-menu-item-only-child" role="menuitem" style="cursor: auto;">
-              <div
-                class="ant-select nav-search-input   ant-select-auto-complete ant-select-single ant-select-customize-input ant-select-show-search">
-                <div class="ant-select-selector"><span class="ant-select-selection-search"><span
-                      class="ant-select-selection-search-input ant-input-affix-wrapper"><span
-                        class="ant-input-prefix"><span role="img" aria-label="search"
-                          class="anticon anticon-search mr-0"><svg viewBox="64 64 896 896" focusable="false" class=""
-                            data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                            <path
-                              d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
-                            </path>
-                          </svg></span></span><input autocomplete="off" placeholder="Search..." type="text"
-                        class="ant-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_1_list"
-                        aria-autocomplete="list" aria-controls="rc_select_1_list"
-                        aria-activedescendant="rc_select_1_list_0" value="" id="rc_select_1"></span></span><span
-                    class="ant-select-selection-placeholder"></span></div>
-              </div>
-            </li> -->
-            <!-- <li class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu" role="menuitem"
-              style="visibility: hidden; position: absolute; display: none;">
-              <div class="ant-menu-submenu-title" role="button" aria-expanded="false" aria-haspopup="true">
-                <span>···</span><i class="ant-menu-submenu-arrow"></i>
-              </div>
-            </li> -->
+                </svg>
+              </span>
+            </li>
           </ul>
         </div>
         <div class="nav-right">
-          <ul >
+          <ul>
             <li class="mr-3">
-              <i class="fa fa-cog" style="font-size: 20px;"></i>
+              <i class="fa fa-sign-out cursor-pointer" (click)="logout()" style="font-size: 20px"></i>
             </li>
           </ul>
         </div>
@@ -66,22 +39,28 @@
   <div class="menu-section">
     <div class="side-bar">
       <ul>
-        <li class="d-flex align-items-center" [class.active]="menuActive === 1" (click)="menuActive = 1">
-          <a [routerLink]="['/category']">
-            <i class="fa fa-book"></i>
+        <li class="d-flex align-items-center" >
+          <a [routerLink]="['/category']"  [routerLinkActive]="'active'">
+            <span role="img" aria-label="car" class="anticon anticon-car"><svg viewBox="64 64 896 896" focusable="false" data-icon="car" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M380 704h264c4.4 0 8-3.6 8-8v-84c0-4.4-3.6-8-8-8h-40c-4.4 0-8 3.6-8 8v36H428v-36c0-4.4-3.6-8-8-8h-40c-4.4 0-8 3.6-8 8v84c0 4.4 3.6 8 8 8zm340-123a40 40 0 1080 0 40 40 0 10-80 0zm239-167.6L935.3 372a8 8 0 00-10.9-2.9l-50.7 29.6-78.3-216.2a63.9 63.9 0 00-60.9-44.4H301.2c-34.7 0-65.5 22.4-76.2 55.5l-74.6 205.2-50.8-29.6a8 8 0 00-10.9 2.9L65 413.4c-2.2 3.8-.9 8.6 2.9 10.8l60.4 35.2-14.5 40c-1.2 3.2-1.8 6.6-1.8 10v348.2c0 15.7 11.8 28.4 26.3 28.4h67.6c12.3 0 23-9.3 25.6-22.3l7.7-37.7h545.6l7.7 37.7c2.7 13 13.3 22.3 25.6 22.3h67.6c14.5 0 26.3-12.7 26.3-28.4V509.4c0-3.4-.6-6.8-1.8-10l-14.5-40 60.3-35.2a8 8 0 003-10.8zM840 517v237H184V517l15.6-43h624.8l15.6 43zM292.7 218.1l.5-1.3.4-1.3c1.1-3.3 4.1-5.5 7.6-5.5h427.6l75.4 208H220l72.7-199.9zM224 581a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg></span>
             <span>Quản lý sản phẩm</span>
           </a>
         </li>
-        <li class="d-flex align-items-center" [class.active]="menuActive === 2" (click)="menuActive = 2">
-          <a [routerLink]="['/table']">
-            <i class="fa fa-table"></i> 
+        <li class="d-flex align-items-center">
+          <a [routerLink]="['/table']"  [routerLinkActive]="'active'">
+            <span role="img" aria-label="user-switch" class="anticon anticon-user-switch"><svg viewBox="64 64 896 896" focusable="false" data-icon="user-switch" width="1em" height="1em" fill="currentColor" aria-hidden="true"><defs><style></style></defs><path d="M759 335c0-137-111-248-248-248S263 198 263 335c0 82.8 40.6 156.2 103 201.2-.4.2-.7.3-.9.4-44.7 18.9-84.8 46-119.3 80.6a373.42 373.42 0 00-80.4 119.5A373.6 373.6 0 00136 874.8a8 8 0 008 8.2h59.9c4.3 0 7.9-3.5 8-7.8 2-77.2 32.9-149.5 87.6-204.3C356 614.2 431 583 511 583c137 0 248-111 248-248zM511 507c-95 0-172-77-172-172s77-172 172-172 172 77 172 172-77 172-172 172zm105 221h264c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H703.5l47.2-60.1a8.1 8.1 0 001.7-4.9c0-4.4-3.6-8-8-8h-72.6c-4.9 0-9.5 2.3-12.6 6.1l-68.5 87.1c-4.4 5.6-6.8 12.6-6.8 19.8.1 17.7 14.4 32 32.1 32zm240 64H592c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h176.5l-47.2 60.1a8.1 8.1 0 00-1.7 4.9c0 4.4 3.6 8 8 8h72.6c4.9 0 9.5-2.3 12.6-6.1l68.5-87.1c4.4-5.6 6.8-12.6 6.8-19.8-.1-17.7-14.4-32-32.1-32z"></path></svg></span>
             <span>Quản lý bàn</span>
           </a>
         </li>
-        <li class="d-flex align-items-center" [class.active]="menuActive === 3" (click)="menuActive = 3">
-          <a [routerLink]="['/order']">
-            <i class="fa fa-table"></i> 
+        <li class="d-flex align-items-center" >
+          <a [routerLink]="['/order']"  [routerLinkActive]="'active'">
+            <span role="img" aria-label="dollar" class="anticon anticon-dollar"><svg viewBox="64 64 896 896" focusable="false" data-icon="dollar" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm47.7-395.2l-25.4-5.9V348.6c38 5.2 61.5 29 65.5 58.2.5 4 3.9 6.9 7.9 6.9h44.9c4.7 0 8.4-4.1 8-8.8-6.1-62.3-57.4-102.3-125.9-109.2V263c0-4.4-3.6-8-8-8h-28.1c-4.4 0-8 3.6-8 8v33c-70.8 6.9-126.2 46-126.2 119 0 67.6 49.8 100.2 102.1 112.7l24.7 6.3v142.7c-44.2-5.9-69-29.5-74.1-61.3-.6-3.8-4-6.6-7.9-6.6H363c-4.7 0-8.4 4-8 8.7 4.5 55 46.2 105.6 135.2 112.1V761c0 4.4 3.6 8 8 8h28.4c4.4 0 8-3.6 8-8.1l-.2-31.7c78.3-6.9 134.3-48.8 134.3-124-.1-69.4-44.2-100.4-109-116.4zm-68.6-16.2c-5.6-1.6-10.3-3.1-15-5-33.8-12.2-49.5-31.9-49.5-57.3 0-36.3 27.5-57 64.5-61.7v124zM534.3 677V543.3c3.1.9 5.9 1.6 8.8 2.2 47.3 14.4 63.2 34.4 63.2 65.1 0 39.1-29.4 62.6-72 66.4z"></path></svg></span>
             <span>Quản lý order</span>
+          </a>
+        </li>
+        <li class="d-flex align-items-center" >
+          <a [routerLink]="['/bill']" [routerLinkActive]="'active'">
+            <i class="fa fa-table"></i>
+            <span>Quản lý bill</span>
           </a>
         </li>
       </ul>
@@ -89,7 +68,6 @@
   </div>
   <div class="rigth-side">
     <div class="content-section">
-      <button (click)="post()">click me</button>
       <router-outlet></router-outlet>
     </div>
   </div>

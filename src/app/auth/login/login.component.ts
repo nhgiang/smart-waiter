@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
       const decoded = this.helper.decodeToken(res.token);
       if (decoded.sub === 'admin') {
         this.router.navigate(['']);
+      }else {
+        this.router.navigate(['client/order'])
       }
     });
   }

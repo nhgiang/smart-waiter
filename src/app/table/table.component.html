@@ -4,8 +4,9 @@
 <div class="body" simplebar>
   <div class="action d-flex">
     <div class="search d-flex">
-      <input type="text" class="mr-3 form-control" [(ngModel)]="keyword">
-      <button class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+      <input type="text" class="form-control" style="border-radius: 0" [(ngModel)]="keyword">
+      <button style="border: 1px solid #cccccc;background-color: #ffffff;" (click)="search()" class="mr-3"><i
+          class="fa fa-search mx-2"></i></button>
     </div>
     <div class="add">
       <button class="btn btn-primary" (click)="addItem()">Thêm mới</button>
@@ -23,19 +24,25 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let item of items; let index = index">
+        <ng-container *ngFor="let item of (items | slice: (page-1)*perPage : page*perPage); let index = index">
           <tr>
             <td>{{index + 1}}</td>
             <td>{{item?.name}}</td>
             <td>{{item?.totalSeats}}</td>
-            <td>{{item?.status}}</td>
+            <td>
+              <ng-container [ngSwitch]="item?.status">
+                <div *ngSwitchCase="'Available'">Hoạt động</div>
+                <div *ngSwitchCase="'NotAvailable'">Không khả dụng</div>
+              </ng-container>
+            </td>
             <td class="text-center" style="width: 130px;">
               <div>
                 <span class="common-action mr-3 text-primary" (click)="editItem(item?.id)">
                   <i class="fa fa-cog"></i>
                 </span>
-                <span class="common-action text-danger" [confirmation]="'Bạn có chắc muốn xóa thông tin bàn này?'" (confirmed)="deleteItem(item?.id)">
-                  <i class="fa fa-trash"></i> 
+                <span class="common-action text-danger" [confirmation]="'Bạn có chắc muốn xóa thông tin bàn này?'"
+                  (confirmed)="deleteItem(item?.id)">
+                  <i class="fa fa-trash"></i>
                 </span>
               </div>
             </td>
@@ -43,5 +50,9 @@
         </ng-container>
       </tbody>
     </table>
+    <div style="display: flex;justify-content: flex-end;" class="mr-4">
+      <pagination [totalItems]="items?.length" [directionLinks]="false" [(ngModel)]="page" [itemsPerPage]="perPage">
+      </pagination>
+    </div>
   </div>
 </div>

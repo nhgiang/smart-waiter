@@ -56,7 +56,7 @@ export class TableFormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+    this.form.value.id = this.id ?? undefined;
     this.adminService.table.create(this.form.value).subscribe(response => {
       this.id ? this.alert.success('Cập nhật bàn thành công') : this.alert.success('Thêm mới bàn thành công');
       this.submited.emit();
