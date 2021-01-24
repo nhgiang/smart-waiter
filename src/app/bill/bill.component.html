@@ -5,12 +5,12 @@
   <div class="row">
     <div class="col-6">
       <div class="sales-report">
-        <div class="d-flex header">
+        <div class="d-flex a-header">
           <h6>Báo cáo doanh thu</h6>
           <select [(ngModel)]="salesReport" (change)="filterReport($event)">
             <option value="day">Doanh thu trong ngày</option>
-            <option class="week">Doanh thu của tuần</option>
-            <option class="month">Doanh thu của tháng</option>
+            <option value="week">Doanh thu của tuần</option>
+            <option value="month">Doanh thu của tháng</option>
             <option value="year">Doanh thu của năm</option>
           </select>
         </div>
@@ -20,6 +20,22 @@
             [chartType]="barChartType">
           </canvas>
         </div>
+        <div class="detail">
+          <div>Tổng doanh thu của
+            <ng-container [ngSwitch]="salesReport">
+              <span *ngSwitchCase="'day'">ngày</span>
+              <span *ngSwitchCase="'week'">tuần</span>
+              <span *ngSwitchCase="'month'">tháng</span>
+              <span *ngSwitchCase="'year'">năm</span>
+            </ng-container>
+            : {{totalPrice}}đ
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="items-report">
+
       </div>
     </div>
   </div>
