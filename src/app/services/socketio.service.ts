@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { storageUtils } from 'utils/storage';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SocketioService {
   public stompClient;
   public msg = new Subject<any>();
   initializeWebSocketConnection() {
-    const serverUrl = 'http://104.131.36.144:9999/ws';
+    const serverUrl = environment.socketEnpoint;
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
