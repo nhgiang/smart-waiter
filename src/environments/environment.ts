@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://104.131.36.144:9999',
+  apiUrl: 'http://104.131.36.144:9999',
   localStorageKey: 'data',
-  socketEnpoint: 'https://104.131.36.144:9999/ws'
+  socketEnpoint: 'http://104.131.36.144:9999/ws'
 };
 
 /*
