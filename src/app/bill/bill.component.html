@@ -2,61 +2,25 @@
   <h5 class="mb-0">Quản lý hóa đơn</h5>
 </div>
 <div class="body" simplebar>
-  <div class="action d-flex">
-    <div class="search d-flex">
-      <input type="text" class="form-control" style="border-radius: 0" [(ngModel)]="keyword">
-      <button style="border: 1px solid #cccccc;background-color: #ffffff;" (click)="search()" class="mr-3"><i
-          class="fa fa-search mx-2" style="color:#8c8c8c;"></i></button>
-      <select class="form-control" style="border-radius: 0">
-        <option value="" hidden>--Chọn Trạng thái--</option>
-        <option value="IN_PROGRESS">Đang chờ</option>
-        <option value="NEW">Mới gọi</option>
-        <option value="PAYMENT">Thanh toán</option>
-        <option value="PAID">Đã thanh toán</option>
-        <option value="DONE">Hoàn thành</option>
-      </select>
+  <div class="row">
+    <div class="col-6">
+      <div class="sales-report">
+        <div class="d-flex header">
+          <h6>Báo cáo doanh thu</h6>
+          <select [(ngModel)]="salesReport">
+            <option value="day">Doanh thu trong ngày</option>
+            <option class="week">Doanh thu của tuần</option>
+            <option class="month">Doanh thu của tháng</option>
+            <option value="year">Doanh thu của năm</option>
+          </select>
+        </div>
+        <div style="display: block">
+          <canvas width="600px" baseChart [datasets]="barChartData" [labels]="barChartLabels"
+            [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="list-item mt-4">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>Ngày tạo</th>
-          <th>Tổng tiền</th>
-          <th>Số lượng</th>
-          <th>Trạng thái</th>
-          <th class="" style="width: 200px;">Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let item of items; let index = index">
-          <tr>
-            <td>{{index + 1}}</td>
-            <td>{{item?.createdDate | date: 'dd/MM/yyyy HH:MM:SS'}}</td>
-            <td>{{item?.totalPrice | number}}đ</td>
-            <td>{{item?.totalItems}}</td>
-            <td>
-              <ng-container [ngSwitch]="item?.status">
-                <div *ngSwitchCase="'DONE'">Hoàn thành</div>
-                <div *ngSwitchCase="'IN_PROGRESS'">Đang chờ</div>
-                <div *ngSwitchCase="'PAYMENT'">Thanh toán</div>
-                <div *ngSwitchCase="'PAID'">Đã thanh toán</div>
-                <div *ngSwitchCase="'NEW'">Mới gọi</div>
-              </ng-container>
-            </td>
-            <td class="text-center d-flex" style="width: 200px;">
-              <div class="cursor-pointer action" style="color:#7546c9" (click)="viewDetail(item?.id,item?.createdDate)">
-                Chi tiết
-              </div>
-              <span class="mx-2" style="font-size: 14px;color: rgba(0,0,0,.1);">|</span>
-              <div class="cursor-pointer action" style="color: #faad14;" (click)="pay()">
-                Thanh toán
-              </div>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
   </div>
 </div>
