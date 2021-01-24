@@ -7,7 +7,7 @@
       <div class="sales-report">
         <div class="d-flex header">
           <h6>Báo cáo doanh thu</h6>
-          <select [(ngModel)]="salesReport">
+          <select [(ngModel)]="salesReport" (change)="filterReport($event)">
             <option value="day">Doanh thu trong ngày</option>
             <option class="week">Doanh thu của tuần</option>
             <option class="month">Doanh thu của tháng</option>
