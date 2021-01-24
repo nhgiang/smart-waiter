@@ -41,6 +41,11 @@ import { ChartsModule } from 'ng2-charts';
     FileUploadModule,
     PaginationModule,
     ChartsModule
+  ],
+  entryComponents: [
+    TableFormComponent,
+    OrderFormComponent,
+    FormCategoryComponent
   ]
 })
 export class MainModule { }

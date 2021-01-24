@@ -1,6 +1,10 @@
+.body {
+  overflow: auto;
+  height: calc(100vh - 65px);
+}
 .list-order-container {
   border: 1px solid #cccccc;
-  height: 655px;
+  height: 100vh;
   overflow: hidden;
   .header {
     padding: 10px;

@@ -44,9 +44,10 @@ export class TableComponent implements OnInit {
   }
 
   deleteItem(id) {
-    this.adminService.table.delete(id).subscribe()
+    this.adminService.table.delete(id).subscribe(res => {
+      this.fetch();
+    })
     this.alert.success('Xóa bàn thành công')
-    this.fetch();
   }
 
   editItem(id) {
@@ -57,7 +58,9 @@ export class TableComponent implements OnInit {
 
     });
     ref.content.submited.subscribe(() => {
-      this.fetch();
+      this.fetch().subscribe(res => {
+        this.items = res;
+      });
     });
   }
 
