@@ -16,6 +16,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { OrderComponent } from '../order/order.component';
 import { OrderFormComponent } from '../order/order-form/order-form.component';
 import { BillComponent } from '../bill/bill.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -38,7 +39,13 @@ import { BillComponent } from '../bill/bill.component';
     ModalModule,
     ReactiveFormsModule,
     FileUploadModule,
-    PaginationModule
+    PaginationModule,
+    ChartsModule
+  ],
+  entryComponents: [
+    TableFormComponent,
+    OrderFormComponent,
+    FormCategoryComponent
   ]
 })
 export class MainModule { }

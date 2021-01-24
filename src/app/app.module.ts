@@ -11,7 +11,7 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as cloudinary from 'cloudinary-core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-
+import { ChartsModule } from 'ng2-charts';
 const config =  {
   cloud_name: 'giang2000',
   upload_preset: 'sem4_cloundinary'
@@ -29,7 +29,7 @@ const config =  {
     ReactiveFormsModule,
     Ng2IziToastModule,
     CloudinaryModule.forRoot(cloudinary, config),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     {

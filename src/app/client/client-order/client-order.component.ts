@@ -27,6 +27,7 @@ export class ClientOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.helper.decodeToken(storageUtils.get('token'));
+    console.log(this.token)
     this.fetch();
     this.socketService.msg.subscribe(data => {
       this.orderId = data;
