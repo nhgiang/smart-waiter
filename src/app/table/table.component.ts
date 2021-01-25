@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { AdminService } from '../api/admin.service';
-import { AlertService } from '../services/alert.service';
-import { TableFormComponent } from './table-form/table-form.component';
+import { Component, OnInit } from '@angular/core'
+import { BsModalService } from 'ngx-bootstrap/modal'
+import { AdminService } from '../api/admin.service'
+import { AlertService } from '../services/alert.service'
+import { TableFormComponent } from './table-form/table-form.component'
 
 @Component({
   selector: 'app-table',
@@ -11,9 +11,10 @@ import { TableFormComponent } from './table-form/table-form.component';
 })
 export class TableComponent implements OnInit {
   keyword: string;
-  items: any[];
+  items: any[]
   page = 1;
   perPage = 10;
+  status = '';
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,
@@ -27,41 +28,41 @@ export class TableComponent implements OnInit {
   }
 
   fetch() {
-    return this.adminService.table.getTables('');
+    return this.adminService.table.getTables('')
   }
 
   search() {
     return this.adminService.item.getItems(this.keyword).subscribe(res => {
-      this.items = res;
-    });
+      this.items = res
+    })
   }
 
   addItem() {
-    const ref = this.modalService.show(TableFormComponent);
+    const ref = this.modalService.show(TableFormComponent)
     ref.content.submited.subscribe(() => {
-      this.fetch();
-    });
+      this.fetch()
+    })
   }
 
   deleteItem(id) {
     this.adminService.table.delete(id).subscribe(res => {
-      this.fetch();
+      this.fetch()
     })
     this.alert.success('Xóa bàn thành công')
   }
 
   editItem(id) {
-    const initialState = { id };
+    const initialState = { id }
     const ref = this.modalService.show(TableFormComponent, {
       initialState,
       backdrop: 'static',
 
-    });
+    })
     ref.content.submited.subscribe(() => {
       this.fetch().subscribe(res => {
-        this.items = res;
-      });
-    });
+        this.items = res
+      })
+    })
   }
 
 }

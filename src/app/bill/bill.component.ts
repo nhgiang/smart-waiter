@@ -27,33 +27,51 @@ export class BillComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [0, 1, 2], label: 'Series A' },
+    { data: [], label: 'Series A' },
   ];
   salesReport = 'day';
   orders: any[];
   constructor(private admin: AdminService) { }
 
   ngOnInit(): void {
+    console.log(new Date().getUTCDay());
     this.fetch();
   }
 
   fetch() {
     this.admin.order.getOrders('').subscribe(res => {
-      this.orders = res;
-      // tslint:disable-next-line: max-line-length
-      const orderByDay = this.orders.filter(t => new Date(t.createdDate).toISOString().split('T')[0] === new Date('2021-01-23T03:13:00.835').toISOString().split('T')[0]);
+      this.orders = res.filter(t => t.status === 'PAID');
+
+      const orderByDay = this.orders.filter(t => {
+        const date = new Date(t.createdDate);
+        date.setHours(date.getHours() + 7);
+        if (date.getDate() === new Date().getDate()) {
+          return true;
+        }
+      });
       this.totalPrice = sumBy(orderByDay, (t) => {
         return t.totalPrice;
       });
       for (let i = 0; i <= 11; i++) {
-        // if (new Date(order.createdDate).getUTCHours() === (i + 10)) {
         this.barChartData[0].data[i] = sumBy(orderByDay, (t) => {
-          if (new Date(t.createdDate).getUTCHours() === (i + 10)) {
+          const date = new Date(t.createdDate);
+          date.setHours(date.getHours() + 7);
+          if (date.getHours() === (i + 10)) {
             return t.totalPrice;
           } else {
             return 0;
           }
         });
+        if (i === 0) {
+          const billTest = orderByDay.filter(t => {
+            const date = new Date(t.createdDate);
+            date.setHours(date.getHours() + 7);
+            if (date.getHours() < 10 || date.getHours() > 21) {
+              return true;
+            }
+          });
+          this.barChartData[0].data[0] += sumBy(billTest, (t) => t.totalPrice);
+        }
       }
     });
 
@@ -61,27 +79,25 @@ export class BillComponent implements OnInit {
 
   filterReport(event) {
     if (event.target.value === 'week') {
-      this.barChartLabels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']
-   
+      this.barChartLabels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
       const orderByWeek = this.orders.filter(t => {
-        // tslint:disable-next-line: max-line-length
-        if (this.getMonday(new Date()).getFullYear() === new Date(t.createdDate).getFullYear()
-          && this.getMonday(new Date()).getMonth() === new Date(t.createdDate).getMonth()) {
-          if (this.getMonday(new Date()).getUTCDate() <= new Date(t.createdDate).getUTCDate() &&
-            new Date(t.createdDate).getUTCDate() <= (this.getMonday(new Date()).getUTCDate() + 6)) {
-            return true;
-          }
+        const date = new Date(t.createdDate);
+        date.setHours(date.getHours() + 7);
+        if (this.getMonday(new Date()).getDate() <= date.getDate() &&
+          date.getDate() <= (this.getMonday(new Date()).getDate() + 6)) {
+          return true;
         }
-      })
+      });
       this.totalPrice = sumBy(orderByWeek, (t) => {
         return t.totalPrice;
       });
       for (let i = 0; i <= 6; i++) {
-        // if (new Date(order.createdDate).getUTCHours() === (i + 10)) {
         this.barChartData[0].data[i] = sumBy(orderByWeek, (t) => {
-          if (new Date(t.createdDate).getUTCDay() === (i + 1) && i !== 6) {
+          const date = new Date(t.createdDate);
+          date.setHours(date.getHours() + 7);
+          if (date.getDay() === (i + 1) && i !== 6) {
             return t.totalPrice;
-          } else if (i === 6 && new Date(t.createdDate).getUTCDay() === 0) {
+          } else if (i === 6 && date.getDay() === 0) {
             return t.totalPrice;
           } else {
             return 0;
@@ -89,25 +105,63 @@ export class BillComponent implements OnInit {
         });
       }
     } else if (event.target.value === 'day') {
-
-      // tslint:disable-next-line: max-line-length
-      const orderByDay = this.orders.filter(t => new Date(t.createdDate).toISOString().split('T')[0] === new Date('2021-01-23T03:13:00.835').toISOString().split('T')[0]);
+      const orderByDay = this.orders.filter(t => {
+        const date = new Date(t.createdDate);
+        date.setHours(date.getHours() + 7);
+        if (date.getDate() === new Date().getDate()) {
+          return true;
+        }
+      });
       this.totalPrice = sumBy(orderByDay, (t) => {
         return t.totalPrice;
       });
       for (let i = 0; i <= 11; i++) {
-        // if (new Date(order.createdDate).getUTCHours() === (i + 10)) {
+        this.barChartLabels.push(`${i + 10}`);
         this.barChartData[0].data[i] = sumBy(orderByDay, (t) => {
-          if (new Date(t.createdDate).getUTCHours() === (i + 10)) {
+          const date = new Date(t.createdDate);
+          date.setHours(date.getHours() + 7);
+          if (date.getHours() === (i + 10)) {
+            return t.totalPrice;
+          } else {
+            return 0;
+          }
+        });
+        if (i === 0) {
+          const billTest = orderByDay.filter(t => {
+            const date = new Date(t.createdDate);
+            date.setHours(date.getHours() + 7);
+            if (date.getHours() < 10 || date.getHours() > 21) {
+              return true;
+            }
+          });
+          this.barChartData[0].data[0] += sumBy(billTest, (t) => t.totalPrice);
+        }
+      }
+    } else if (event.target.value === 'month') {
+      this.barChartLabels = [];
+      const orderByWeek = this.orders.filter(t => {
+        const date = new Date(t.createdDate);
+        date.setHours(date.getHours() + 7);
+        if (1 <= date.getDate() && date.getDate() <= 31) {
+          return true;
+        }
+      });
+
+      this.totalPrice = sumBy(orderByWeek, (t) => {
+        return t.totalPrice;
+      });
+      for (let i = 0; i <= 30; i++) {
+        this.barChartLabels.push(`${i + 1}`);
+        this.barChartData[0].data[i] = sumBy(orderByWeek, (t) => {
+          const date = new Date(t.createdDate);
+          date.setHours(date.getHours() + 7);
+          if (date.getDate() === (i + 1)) {
             return t.totalPrice;
           } else {
             return 0;
           }
         });
       }
-    } else if (event.target.value === 'month') {
-
-
     } else {
 
     }

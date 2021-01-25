@@ -27,10 +27,12 @@ export class ClientOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.helper.decodeToken(storageUtils.get('token'));
-    console.log(this.token)
     this.fetch();
     this.socketService.msg.subscribe(data => {
-      this.orderId = data;
+      this.orderId = data.id;
+      if (data.type === 'updateOrderStatus') {
+        this.orderId = null;
+      }
     });
   }
 
@@ -42,13 +44,13 @@ export class ClientOrderComponent implements OnInit {
     this.admin.table.getTables('').subscribe(tables => {
       this.tableId = tables.find(t => this.token.jti === t.loginTableId).id;
       this.fecthOrder();
-    })
+    });
   }
 
   fecthOrder() {
     this.admin.order.getOrders('').subscribe(orders => {
       if (orders.filter(o => o.tableId === this.tableId).length > 0) {
-        this.orderId = orders.filter(o => o.tableId === this.tableId)[0].id;
+        this.orderId = orders.filter(o => o.tableId === this.tableId && o.status !== 'PAID')[0].id;
       }
     });
   }
@@ -108,7 +110,7 @@ export class ClientOrderComponent implements OnInit {
         orderItem: orderItemList[0],
         orderId: this.orderId
       };
-      this.socketService.update(data)
+      this.socketService.update(data);
     } else {
       const data = {
         orderItemList,
@@ -120,18 +122,11 @@ export class ClientOrderComponent implements OnInit {
   }
 
   payment() {
-    // const data = {
-    //   orderId: this.orderId,
-    //   orderStatus: 'PAYMENT'
-    // };
-    // this.socketService.updateStatusOrder(data);
-    const billData = {
-      tableId: this.token.jti,
-      orderIds: [
-        this.orderId
-      ]
-    }
-    this.socketService.createBill(billData)
+    const data = {
+      orderId: this.orderId,
+      orderStatus: 'PAYMENT'
+    };
+    this.socketService.updateStatusOrder(data);
   }
 
   note(id, e) {
