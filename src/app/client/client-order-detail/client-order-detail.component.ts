@@ -34,10 +34,10 @@ export class ClientOrderDetailComponent implements OnInit {
       this.tableId = tables.find(t => this.token.jti === t.loginTableId).id;
       this.admin.order.getOrders('').subscribe(orders => {
         if (orders.filter(o => o.tableId === this.tableId).length > 0) {
-          this.order = orders.filter(o => o.tableId === this.tableId)[0];
+          this.order = orders.filter(o => o.tableId === this.tableId && o.status !== 'PAID')[0];
         }
       });
-    })
+    });
   }
 
   getStatus(status) {

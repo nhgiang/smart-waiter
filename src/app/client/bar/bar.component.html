@@ -5,7 +5,7 @@
   <div class="row list-table">
     <div class="col-4" *ngFor="let item of tables;let index = index">
       <div class="table" (click)="showOrder(item?.id)" [class.done]="item?.statusTable === 2 || item?.statusTable === 3" [class.in-progress]="item?.statusTable === 1">
-        {{index + 1}}
+        {{item.name.split('tb')[1]}}
         <div *ngIf="item?.statusTable === 3" class="rotating dollar">&#36;</div>
       </div>
     </div>

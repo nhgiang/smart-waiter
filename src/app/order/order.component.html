@@ -10,7 +10,7 @@
       <select class="form-control" style="border-radius: 0" [(ngModel)]="status">
         <option value="" hidden>--Chọn Trạng thái--</option>
         <option value="IN_PROGRESS">Đang chờ</option>
-        <option value="NEW">Mới gọi</option>
+        <option value="CREATED">Mới gọi</option>
         <option value="PAYMENT">Thanh toán</option>
         <option value="PAID">Đã thanh toán</option>
         <option value="DONE">Hoàn thành</option>
@@ -42,7 +42,7 @@
                 <div *ngSwitchCase="'IN_PROGRESS'">Đang chờ</div>
                 <div *ngSwitchCase="'PAYMENT'">Thanh toán</div>
                 <div *ngSwitchCase="'PAID'">Đã thanh toán</div>
-                <div *ngSwitchCase="'NEW'">Mới gọi</div>
+                <div *ngSwitchCase="'CREATED'">Mới gọi</div>
               </ng-container>
             </td>
             <td class="text-center d-flex" style="width: 200px;">
@@ -50,7 +50,8 @@
                 Chi tiết
               </div>
               <span class="mx-2" style="font-size: 14px;color: rgba(0,0,0,.1);">|</span>
-              <div class="cursor-pointer action" style="color: #faad14;" (click)="pay()">
+              <div class="cursor-pointer action" style="color: #faad14;" [confirmation]="'Thanh toán?'"
+              (confirmed)="pay(item?.id)">
                 Thanh toán
               </div>
             </td>

@@ -3,7 +3,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { AdminService } from '../api/admin.service';
 import { AlertService } from '../services/alert.service';
 import { OrderFormComponent } from './order-form/order-form.component';
-import { } from 'lodash'
+import { } from 'lodash';
 import { SocketioService } from '../services/socketio.service';
 @Component({
   selector: 'app-order',
@@ -33,9 +33,9 @@ export class OrderComponent implements OnInit {
       } else {
         this.items.map((item, i) => {
           if (item.id === items.id) {
-            this.items[i] = items
+            this.items[i] = items;
           }
-        })
+        });
       }
     });
   }
@@ -50,47 +50,20 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  addItem() {
-    const ref = this.modalService.show(OrderFormComponent);
-    ref.content.submited.subscribe(() => {
-      this.fetch().subscribe(res => {
-        this.items = res;
-        ref.hide()
-      });
-    });
-  }
-
-  deleteItem(id) {
-    this.adminService.item.delete(id).subscribe(() => {
-      this.alert.success('Xóa sản phẩm thành công')
-      this.fetch().subscribe(res => {
-        this.items = res;
-      });
-    });
-  }
-
-  editItem(id, createdDate) {
-    const initialState = { id, createdDate };
-    const ref = this.modalService.show(OrderFormComponent, {
-      initialState,
-      backdrop: 'static'
-    })
-    ref.content.submited.subscribe(() => {
-      this.fetch().subscribe(res => {
-        this.items = res;
-      });
-    });
-  }
   viewDetail(id, createdDate) {
     const initialState = { id, createdDate };
     const ref = this.modalService.show(OrderFormComponent, {
       initialState,
       backdrop: 'static',
       class: 'modal-lg'
-    })
+    });
   }
 
-  pay() {
-    this.socketService.createBill({});
+  pay(id) {
+    const data = {
+      orderId: id,
+      orderStatus: 'PAID'
+    };
+    this.socketService.updateStatusOrder(data);
   }
 }

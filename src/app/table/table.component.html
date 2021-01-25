@@ -7,6 +7,11 @@
       <input type="text" class="form-control" style="border-radius: 0" [(ngModel)]="keyword">
       <button style="border: 1px solid #cccccc;background-color: #ffffff;" (click)="search()" class="mr-3"><i
           class="fa fa-search mx-2"></i></button>
+      <select class="form-control mr-3" style="border-radius: 0" [(ngModel)]="status">
+        <option value="">Trạng thái</option>
+        <option value="FOOD">Hoạt động</option>
+        <option value="DRINK">Không khả dụng</option>
+      </select>
     </div>
     <div class="add">
       <button class="btn btn-primary" (click)="addItem()">Thêm mới</button>
@@ -24,7 +29,8 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let item of (items | slice: (page-1)*perPage : page*perPage); let index = index">
+        <ng-container
+          *ngFor="let item of (items | slice: (page-1)*perPage : page*perPage | filter:'status': status); let index = index">
           <tr>
             <td>{{index + 1}}</td>
             <td>{{item?.name}}</td>
