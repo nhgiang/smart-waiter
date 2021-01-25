@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label, SingleDataSet } from 'ng2-charts';
 import { AdminService } from '../api/admin.service';
 import { sumBy } from 'lodash';
 @Component({
@@ -29,6 +29,17 @@ export class BillComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     { data: [], label: 'Series A' },
   ];
+
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = ['Sữa Chua Chuối', '	Soup Khoai Tây', 'Soup Bí Đỏ Kiểu Pháp', 'Gân Bò Hầm Vang Đỏ', 'Gà Cuộn Lá Nếp'];
+  public pieChartData: SingleDataSet = [10, 20, 5, 6, 9];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+
+
   salesReport = 'day';
   orders: any[];
   constructor(private admin: AdminService) { }
@@ -105,6 +116,7 @@ export class BillComponent implements OnInit {
         });
       }
     } else if (event.target.value === 'day') {
+      this.barChartLabels = []
       const orderByDay = this.orders.filter(t => {
         const date = new Date(t.createdDate);
         date.setHours(date.getHours() + 7);
