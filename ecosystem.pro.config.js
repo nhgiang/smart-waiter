@@ -1,8 +1,8 @@
 module.exports = {
     "apps": [
         {
-            "name": "Document",
-            "script": "./server/app.js",
+            "name": "SmartWaiter",
+            "script": "./server.js",
             "watch": ["server"],
             "ignore_watch": ["logs", "node_modules"],
             "env": {
