@@ -140,8 +140,9 @@ export class BillComponent implements OnInit {
     } else if (event.target.value === 'month') {
       this.barChartLabels = []
       const orderByWeek = this.orders.filter(t => {
-        if (1 <= new Date(t.createdDate).getDate() &&
-          new Date(t.createdDate).getDate() <= 31) {
+        const date = new Date(t.createdDate)
+        date.setHours(date.getHours() + 7)
+        if (1 <= date.getDate() && date.getDate() <= 31) {
           return true
         }
       })
@@ -152,7 +153,9 @@ export class BillComponent implements OnInit {
       for (let i = 0; i <= 30; i++) {
         this.barChartLabels.push(`${i + 1}`)
         this.barChartData[0].data[i] = sumBy(orderByWeek, (t) => {
-          if (new Date(t.createdDate).getDate() === (i + 1)) {
+          const date = new Date(t.createdDate)
+          date.setHours(date.getHours() + 7)
+          if (date.getDate() === (i + 1)) {
             return t.totalPrice
           } else {
             return 0
