@@ -11,6 +11,7 @@ module.exports = {
             "log_date_format": "YYYY-MM-DD HH:mm:ss",
             "error_file": "./logs/pm2.err",
             "out_file": "./logs/pm2.log"
+
         }
     ]
 
